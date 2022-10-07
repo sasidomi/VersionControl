@@ -38,7 +38,7 @@ namespace Excel
 
         void CreateExcel()
         {
-            /*
+
             try
             {
                 // Excel elindítása és az applikáció objektum betöltése
@@ -68,7 +68,7 @@ namespace Excel
                 xlWB = null;
                 xlApp = null;
             }
-            */
+
         }
 
         void CreateTable()
@@ -112,12 +112,36 @@ namespace Excel
                 values[c, 5] = f.NumberOfRooms;
                 values[c, 6] = f.FloorArea;
                 values[c, 7] = f.Price;
-                values[c, 8] = "";
+                values[c, 8] = $"=1000000*{GetCell(c+2, 8)}/{GetCell(c + 2, 7)}";
+
+                c++;
             }
 
             xlSheet.get_Range(
             GetCell(2, 1),
             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+
+
+            Excel.Range FullRange = xlSheet.get_Range(GetCell(1, 1), GetCell(flats.Count + 1, 9));
+            FullRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range FirstColumn = xlSheet.get_Range(GetCell(2, 1), GetCell(flats.Count + 1, 1));
+            FirstColumn.Font.Bold = true;
+            FirstColumn.Interior.Color = Color.LightYellow;
+
+            Excel.Range NegyzetmeterRange = xlSheet.get_Range(GetCell(2, 9), GetCell(flats.Count + 1, 9));
+            NegyzetmeterRange.Interior.Color = Color.LightGreen;
+            NegyzetmeterRange.NumberFormat = "#,##0.00";
         }
 
         private string GetCell(int x, int y)
