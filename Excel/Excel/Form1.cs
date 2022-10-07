@@ -15,6 +15,17 @@ namespace Excel
         public Form1()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+
+        List<Flat> flats;
+
+        RealEstateEntities context = new RealEstateEntities();
+
+        void LoadData()
+        {
+            flats = context.Flats.ToList();
         }
     }
 }
