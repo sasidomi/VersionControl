@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using Webszolgaltatas.Entities;
 using Webszolgaltatas.MnbServiceReference;
 
@@ -17,11 +18,12 @@ namespace Webszolgaltatas
         public Form1()
         {
             InitializeComponent();
-            GetEuroExchangeRate();
+            var result = GetEuroExchangeRate();
+            XML(result);
             dataGridView1.DataSource = Rates;
         }
 
-        void GetEuroExchangeRate()
+        string GetEuroExchangeRate()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
@@ -37,9 +39,32 @@ namespace Webszolgaltatas
             var result = response.GetExchangeRatesResult;
 
             //Console.Write(result);
+            return result;
+        }
+
+        void XML(string result)
+        {
+            var xml = new XmlDocument();
+
+            xml.LoadXml(result);
+
+            foreach (XmlElement e in xml.DocumentElement)
+            {
+                var rate = new RateData();
+
+                rate.Date = DateTime.Parse(e.GetAttribute("date"));
+
+                var childElement = (XmlElement)e.ChildNodes[0];
+                rate.Currency = childElement.GetAttribute("curr");
+
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rate.Value = value / unit;
+            }
+
         }
 
         BindingList<RateData> Rates = new BindingList<RateData>();
-
     }
 }
