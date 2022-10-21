@@ -18,9 +18,16 @@ namespace Webszolgaltatas
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
 
+        BindingList<string> Currencies = new BindingList<string>();
+
         public Form1()
         {
             InitializeComponent();
+            comboBox1.DataSource = Currencies;
+
+            string result = GetCurrencies();
+            LoadCurrencies(result);
+
             RefreshData();
 
         }
@@ -32,6 +39,33 @@ namespace Webszolgaltatas
             XML(result);
             dataGridView1.DataSource = Rates;
             ShowDiagram();
+        }
+
+        string GetCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetCurrenciesRequestBody();
+
+            var response = mnbService.GetCurrencies(request);
+
+            var result = response.GetCurrenciesResult;
+
+            return result;
+        }
+
+        void LoadCurrencies(string result)
+        {
+            var xml = new XmlDocument();
+
+            xml.LoadXml(result);
+
+            var childElement = xml.DocumentElement.ChildNodes[0];
+
+            foreach (XmlElement e in childElement)
+            {
+                Currencies.Add(e.InnerText.ToString());
+            }
         }
 
         string GetEuroExchangeRate()
@@ -67,6 +101,8 @@ namespace Webszolgaltatas
                 rate.Date = DateTime.Parse(e.GetAttribute("date"));
 
                 var childElement = (XmlElement)e.ChildNodes[0];
+                if (childElement == null)
+                    continue;
                 rate.Currency = childElement.GetAttribute("curr");
 
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
