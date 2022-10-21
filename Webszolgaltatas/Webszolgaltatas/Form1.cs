@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using Webszolgaltatas.Entities;
 using Webszolgaltatas.MnbServiceReference;
@@ -15,12 +16,15 @@ namespace Webszolgaltatas
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
+
         public Form1()
         {
             InitializeComponent();
-            var result = GetEuroExchangeRate();
+            string result = GetEuroExchangeRate();
             XML(result);
             dataGridView1.DataSource = Rates;
+            ShowDiagram();
         }
 
         string GetEuroExchangeRate()
@@ -51,6 +55,7 @@ namespace Webszolgaltatas
             foreach (XmlElement e in xml.DocumentElement)
             {
                 var rate = new RateData();
+                Rates.Add(rate);
 
                 rate.Date = DateTime.Parse(e.GetAttribute("date"));
 
@@ -62,9 +67,26 @@ namespace Webszolgaltatas
                 if (unit != 0)
                     rate.Value = value / unit;
             }
-
         }
 
-        BindingList<RateData> Rates = new BindingList<RateData>();
+        void ShowDiagram()
+        {
+            chart1.DataSource = Rates;
+
+            var series = chart1.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            var legend = chart1.Legends[0];
+            legend.Enabled = false;
+
+            var chartArea = chart1.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
+        }
+
     }
 }
