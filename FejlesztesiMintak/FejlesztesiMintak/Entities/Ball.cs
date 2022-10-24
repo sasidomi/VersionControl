@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace FejlesztesiMintak.Entities
 {
-    class Ball : Label
+    public class Ball : Label
     {
         public Ball()
         {
