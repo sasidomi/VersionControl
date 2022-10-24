@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FejlesztesiMintak.Entities
 {
-    public class BallFactory : IToyFactory
+    public class CarFactory : IToyFactory
     {
+        //jobbklikk class-névre -> Quick actions... -> Implement..
         public Toy CreateNew()
         {
-            Ball b = new Ball();
-            return b;
+            return new Car();
         }
     }
 }
