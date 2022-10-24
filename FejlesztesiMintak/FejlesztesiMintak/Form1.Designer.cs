@@ -36,6 +36,7 @@ namespace FejlesztesiMintak
             this.ballButton = new System.Windows.Forms.Button();
             this.carButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.colorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -91,11 +92,22 @@ namespace FejlesztesiMintak
             this.label1.TabIndex = 3;
             this.label1.Text = "Coming next:";
             // 
+            // colorButton
+            // 
+            this.colorButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.colorButton.Location = new System.Drawing.Point(542, 250);
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(150, 46);
+            this.colorButton.TabIndex = 4;
+            this.colorButton.UseVisualStyleBackColor = false;
+            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.colorButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.carButton);
             this.Controls.Add(this.ballButton);
@@ -115,6 +127,7 @@ namespace FejlesztesiMintak
         private System.Windows.Forms.Button ballButton;
         private System.Windows.Forms.Button carButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button colorButton;
     }
 }
 
