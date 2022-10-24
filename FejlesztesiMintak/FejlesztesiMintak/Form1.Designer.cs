@@ -37,6 +37,9 @@ namespace FejlesztesiMintak
             this.carButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.colorButton = new System.Windows.Forms.Button();
+            this.presentButton = new System.Windows.Forms.Button();
+            this.presentColorPicker1 = new System.Windows.Forms.Button();
+            this.presentColorPicker2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -65,7 +68,7 @@ namespace FejlesztesiMintak
             this.ballButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.ballButton.Location = new System.Drawing.Point(145, 254);
             this.ballButton.Name = "ballButton";
-            this.ballButton.Size = new System.Drawing.Size(91, 42);
+            this.ballButton.Size = new System.Drawing.Size(114, 42);
             this.ballButton.TabIndex = 1;
             this.ballButton.Text = "BALL";
             this.ballButton.UseVisualStyleBackColor = true;
@@ -74,9 +77,9 @@ namespace FejlesztesiMintak
             // carButton
             // 
             this.carButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.carButton.Location = new System.Drawing.Point(241, 254);
+            this.carButton.Location = new System.Drawing.Point(265, 254);
             this.carButton.Name = "carButton";
-            this.carButton.Size = new System.Drawing.Size(91, 42);
+            this.carButton.Size = new System.Drawing.Size(114, 42);
             this.carButton.TabIndex = 2;
             this.carButton.Text = "CAR";
             this.carButton.UseVisualStyleBackColor = true;
@@ -95,18 +98,52 @@ namespace FejlesztesiMintak
             // colorButton
             // 
             this.colorButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.colorButton.Location = new System.Drawing.Point(542, 250);
+            this.colorButton.Location = new System.Drawing.Point(145, 302);
             this.colorButton.Name = "colorButton";
-            this.colorButton.Size = new System.Drawing.Size(150, 46);
+            this.colorButton.Size = new System.Drawing.Size(114, 46);
             this.colorButton.TabIndex = 4;
             this.colorButton.UseVisualStyleBackColor = false;
             this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // presentButton
+            // 
+            this.presentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.presentButton.Location = new System.Drawing.Point(385, 254);
+            this.presentButton.Name = "presentButton";
+            this.presentButton.Size = new System.Drawing.Size(114, 42);
+            this.presentButton.TabIndex = 5;
+            this.presentButton.Text = "PRESENT";
+            this.presentButton.UseVisualStyleBackColor = true;
+            this.presentButton.Click += new System.EventHandler(this.presentButton_Click);
+            // 
+            // presentColorPicker1
+            // 
+            this.presentColorPicker1.BackColor = System.Drawing.Color.Teal;
+            this.presentColorPicker1.Location = new System.Drawing.Point(385, 302);
+            this.presentColorPicker1.Name = "presentColorPicker1";
+            this.presentColorPicker1.Size = new System.Drawing.Size(114, 46);
+            this.presentColorPicker1.TabIndex = 6;
+            this.presentColorPicker1.UseVisualStyleBackColor = false;
+            this.presentColorPicker1.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // presentColorPicker2
+            // 
+            this.presentColorPicker2.BackColor = System.Drawing.Color.Red;
+            this.presentColorPicker2.Location = new System.Drawing.Point(385, 354);
+            this.presentColorPicker2.Name = "presentColorPicker2";
+            this.presentColorPicker2.Size = new System.Drawing.Size(114, 46);
+            this.presentColorPicker2.TabIndex = 7;
+            this.presentColorPicker2.UseVisualStyleBackColor = false;
+            this.presentColorPicker2.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.presentColorPicker2);
+            this.Controls.Add(this.presentColorPicker1);
+            this.Controls.Add(this.presentButton);
             this.Controls.Add(this.colorButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.carButton);
@@ -128,6 +165,9 @@ namespace FejlesztesiMintak
         private System.Windows.Forms.Button carButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button colorButton;
+        private System.Windows.Forms.Button presentButton;
+        private System.Windows.Forms.Button presentColorPicker1;
+        private System.Windows.Forms.Button presentColorPicker2;
     }
 }
 

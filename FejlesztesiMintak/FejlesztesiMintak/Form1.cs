@@ -94,6 +94,7 @@ namespace FejlesztesiMintak
             Controls.Add(_nextToy);
         }
 
+        //a másik 2 colorPicker button-hoz is ez van: Properties ablak -> villám jelecske -> click esemény -> ez a függvény kiválasztva
         private void colorButton_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -105,6 +106,15 @@ namespace FejlesztesiMintak
                 return;
             }
             button.BackColor = cd.Color;
+        }
+
+        private void presentButton_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory() 
+            {
+                RibbonColor = presentColorPicker2.BackColor,
+                BoxColor = presentColorPicker1.BackColor
+            };
         }
     }
 }
