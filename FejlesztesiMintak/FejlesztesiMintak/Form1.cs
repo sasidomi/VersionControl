@@ -22,13 +22,18 @@ namespace FejlesztesiMintak
 
         private List<Toy> _toys = new List<Toy>();
 
+
         private IToyFactory _factory;
         //Inconsistent accessibility: property type 'type' is less accessible than property 'property'
         //megoldás: a Ball és BallFactory class-okat is public-ra rakni az Entities-ben
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set
+            {
+                _factory = value;
+                DisplayNext();
+            }
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -59,6 +64,31 @@ namespace FejlesztesiMintak
                 _toys.Remove(firstToy);
                 mainPanel.Controls.Remove(firstToy);
             }
+        }
+
+        private void ballButton_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void carButton_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        Toy _nextToy;
+
+        void DisplayNext()
+        {
+            if (_nextToy != null)
+            {
+                Controls.Remove(_nextToy);
+            }
+
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Left = label1.Left;
+            Controls.Add(_nextToy);
         }
     }
 }
