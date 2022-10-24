@@ -5,33 +5,17 @@ using System.Windows.Forms;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using FejlesztesiMintak.Abstractions;
 
 namespace FejlesztesiMintak.Entities
 {
-    public class Ball : Label
+    public class Ball : Toy
     {
-        public Ball()
-        {
-            AutoSize = false;
-            Width = 50;
-            Height = 50;
-            Paint += Ball_Paint;
-        }
-
-        private void Ball_Paint(object sender, PaintEventArgs e)
-        {
-            //throw new NotImplementedException();
-            DrawImage(e.Graphics);
-        }
-
-        protected void DrawImage(Graphics g)
+        //override: abstract és virtual függvények felülírása esetén kell
+        //láthatóság-nak egyeznie kell (private nem lehet nyilván)
+        protected override void DrawImage(Graphics g)
         {
             g.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height);
-        }
-
-        public void MoveBall()
-        {
-            Left += 1;
         }
     }
 }
