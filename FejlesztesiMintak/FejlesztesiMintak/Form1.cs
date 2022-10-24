@@ -1,4 +1,5 @@
-﻿using FejlesztesiMintak.Entities;
+﻿using FejlesztesiMintak.Abstractions;
+using FejlesztesiMintak.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,15 @@ namespace FejlesztesiMintak
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
-        private List<Ball> _balls = new List<Ball>();
+        private List<Toy> _toys = new List<Toy>();
 
-        private BallFactory _factory;
+        private IToyFactory _factory;
         //Inconsistent accessibility: property type 'type' is less accessible than property 'property'
         //megoldás: a Ball és BallFactory class-okat is public-ra rakni az Entities-ben
-        public BallFactory Factory
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -33,30 +34,30 @@ namespace FejlesztesiMintak
         private void createTimer_Tick(object sender, EventArgs e)
         {
             //automatikusan aktív: Design -> Properties -> Enabled: true
-            Ball b = Factory.CreateNew();
-            _balls.Add(b);
-            b.Left = -b.Width;
-            mainPanel.Controls.Add(b);
+            Toy t = Factory.CreateNew();
+            _toys.Add(t);
+            t.Left = -t.Width;
+            mainPanel.Controls.Add(t);
         }
 
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             //automatikusan aktív: Design -> Properties -> Enabled: true
-            var mostRightBall = 0;
-            foreach (Ball b in _balls)
+            var mostRightToy = 0;
+            foreach (Toy t in _toys)
             {
-                b.MoveBall();
+                t.MoveToy();
 
-                if (b.Left > mostRightBall)
+                if (t.Left > mostRightToy)
                 {
-                    mostRightBall = b.Left;
+                    mostRightToy = t.Left;
                 }
             }
-            if (mostRightBall > 1000)
+            if (mostRightToy > 1000)
             {
-                var firstBall = _balls[0];
-                _balls.Remove(firstBall);
-                mainPanel.Controls.Remove(firstBall);
+                var firstToy = _toys[0];
+                _toys.Remove(firstToy);
+                mainPanel.Controls.Remove(firstToy);
             }
         }
     }
