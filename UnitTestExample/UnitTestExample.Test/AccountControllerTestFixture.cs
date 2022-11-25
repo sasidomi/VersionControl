@@ -74,6 +74,12 @@ namespace UnitTestExample.Entities
             TestCase("irf@uni-corvinus.hu", "rovid"),
             TestCase("nincs.kukac.hu", "JoJelszo4"),
             TestCase("van@kukac.hu", "nincsSzam"),
+            TestCase("irf@uni-corvinus", "Abcd1234"),
+            TestCase("irf.uni-corvinus.hu", "Abcd1234"),
+            TestCase("irf@uni-corvinus.hu", "abcd1234"),
+            TestCase("irf@uni-corvinus.hu", "ABCD1234"),
+            TestCase("irf@uni-corvinus.hu", "abcdABCD"),
+            TestCase("irf@uni-corvinus.hu", "Ab1234"),
         ]
         public void TestRegisterValidateException(string email, string password)
         {
